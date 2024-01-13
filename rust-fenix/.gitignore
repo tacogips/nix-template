@@ -1,0 +1,10 @@
+**/target
+.DS_Store
+
+.env
+.vscode
+.idea
+**/.~lock*
+**/.npmrc
+**/.envrc
+**/.direnv
