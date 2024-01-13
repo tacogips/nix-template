@@ -1,6 +1,6 @@
 [toolchain]
 # nightly, 1.75.0, etc
 channel = "stable"
-components = ["rustfmt", "cargo", "clippy", "rust-src"]
+components = ["rustfmt", "cargo", "clippy", "rust-src", "rust-analyzer"]
 #targets = ["wasm32-unknown-unknown", "thumbv2-none-eabi"]
 #profile = "minimal"

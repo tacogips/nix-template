@@ -4,29 +4,43 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
     flake-utils.url = "github:numtide/flake-utils";
-    fenix.url = "github:nix-community/fenix";
+    nixpkgs-python.url = "github:cachix/nixpkgs-python";
   };
 
   outputs =
     { self
     , nixpkgs
     , flake-utils
-    , fenix
+    , nixpkgs-python
     ,
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
-      overlays = [ fenix.overlays.default ];
-      pkgs = import nixpkgs { inherit system overlays; };
+      python-version = "3.9";
+      pkgs = import nixpkgs {
+        inherit system;
+      };
+      python = nixpkgs-python.packages.${system}.${python-version};
     in
 
     {
       devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs;
+        buildInputs = [
+          (pkgs.python3.withPackages (pypkg: with
+          pypkg;[ flake8 pep8-naming black ])
+
+          )
+        ] ++ (with pkgs;
           [
             just
-            rust-components
-          ];
+            nodePackages.pyright
+          ]);
+
+        shellHook = ''
+          [[ -d venv ]] || python3 -m venv venv
+          source venv/bin/activate
+
+        '';
       };
     });
 }
