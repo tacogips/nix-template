@@ -1,21 +1,21 @@
 {
-  output = { ... }: {
+  outputs = { ... }: {
+    templates = {
+      rust-fenix = {
+        path = ./rust-fenix;
 
-    rust-fenix = {
-      path = ./rust-fenix;
+      };
 
-    };
+      python-venv = {
+        path = ./python-venv;
+      };
 
-    python-venv = {
-      path = ./python-venv;
-    };
-
-    docker = {
-      path = ./docker;
-    };
-    zig = {
-      path = ./zig;
+      docker = {
+        path = ./docker;
+      };
+      zig = {
+        path = ./zig;
+      };
     };
   };
-
 }
