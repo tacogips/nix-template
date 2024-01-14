@@ -1,0 +1,4 @@
+**/.direnv
+**/.envrc
+zig-cache
+.DS_Store

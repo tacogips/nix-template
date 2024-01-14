@@ -33,6 +33,7 @@
           ]);
 
         shellHook = ''
+          zig init
         '';
       };
     });

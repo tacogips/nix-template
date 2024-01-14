@@ -11,21 +11,19 @@
     , nixpkgs
     , nixpkgs-unstable
     , flake-utils
-    , fenix
     ,
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
-      overlays = [ fenix.overlays.default ];
       pkgs-unstable = import nixpkgs-unstable { inherit system; };
+      pkgs = import nixpkgs { inherit system; };
     in
 
     {
       devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs;
-          [
-            pkgs-unstable.docker_24
-          ];
+        buildInputs = [
+          pkgs-unstable.docker_24
+        ];
 
       };
     });
