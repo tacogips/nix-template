@@ -27,12 +27,12 @@
     in
 
     {
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs;
-          [
-            just
-            rust-components
-          ];
-      };
+      devShells.default = pkgs.mkShell
+        {
+          buildInputs = [ rust-components ] ++ (with pkgs;
+            [
+              just
+            ]);
+        };
     });
 }
