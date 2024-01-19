@@ -26,7 +26,7 @@
     {
       devShells.default = pkgs.mkShell {
         buildInputs = [
-          (pkgs.python3.withPackages (pypkg: with
+          (python.withPackages (pypkg: with
           pypkg;[ flake8 pep8-naming black ])
 
           )
