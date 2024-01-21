@@ -36,7 +36,7 @@
           ]);
 
         shellHook = ''
-          zig init
+          [[ -f build.zig ]] || zig init
         '';
       };
     });
