@@ -11,22 +11,19 @@
     { self
     , nixpkgs
     , flake-utils
-    , nixpkgs-python
     ,
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
-      python-version = "3.9";
       pkgs = import nixpkgs {
         inherit system;
       };
-      python = nixpkgs-python.packages.${system}.${python-version};
     in
 
     {
       devShells.default = pkgs.mkShell {
         buildInputs = [
-          (python.withPackages (pypkg: with
+          (pkgs.python3.withPackages (pypkg: with
           pypkg;[ flake8 pep8-naming black ])
 
           )
