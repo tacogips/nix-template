@@ -10,6 +10,10 @@
         path = ./python-venv;
       };
 
+      python-latest = {
+        path = ./python-latest;
+      };
+
       docker = {
         path = ./docker;
       };
