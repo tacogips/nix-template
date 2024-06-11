@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs-python.url = "github:cachix/nixpkgs-python";
   };
 
   outputs =
@@ -22,15 +21,17 @@
 
     {
       devShells.default = pkgs.mkShell {
-        buildInputs = [
-          (pkgs.python3.withPackages (pypkg: with
-          pypkg;[ flake8 pep8-naming black ])
-
-          )
-        ] ++ (with pkgs;
+        buildInputs =
+          (with pkgs;
           [
             just
             nodePackages.pyright
+
+            (python3.withPackages
+              (pypkg:
+                [ pypkg.pip pypkg.flake8 pypkg.pep8-naming pypkg.black pypkg.GitPython pypkg.pytz ]))
+
+
           ]);
 
         shellHook = ''
